@@ -1,0 +1,25 @@
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /usr/share/nginx/html/nianyike.com;
+        index index.php index.html index.htm;
+
+        server_name nianyike.com www.nianyike.com;
+
+        location /doc/ {
+                alias /usr/share/doc/;
+                autoindex on;
+                allow 127.0.0.1;
+                allow ::1;
+                deny all;
+        }
+
+        location /wp-content/ {
+                alias /usr/share/nginx/html/nianyike/wp-content/;
+        }
+
+        location / {
+                try_files $uri $uri/ /index.php;
+        }
+}
